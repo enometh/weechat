@@ -23,19 +23,6 @@ find_program(MSGMERGE_EXECUTABLE msgmerge REQUIRED)
 find_program(MSGFMT_EXECUTABLE msgfmt REQUIRED)
 
 set(PO_FILES
-  cs.po
-  de.po
-  es.po
-  fr.po
-  hu.po
-  it.po
-  ja.po
-  pl.po
-  pt.po
-  pt_BR.po
-  ru.po
-  sr.po
-  tr.po
 )
 
 set(BUGS_ADDRESS "flashcode@flashtux.org")
