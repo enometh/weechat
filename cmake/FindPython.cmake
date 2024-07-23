@@ -28,7 +28,7 @@
 #  PYTHON_LIBRARIES = path to where libpython.so* can be found
 #  PYTHON_LDFLAGS = python compiler options for linking
 
-pkg_check_modules(PYTHON python3-embed IMPORTED_TARGET GLOBAL)
+pkg_check_modules(PYTHON python-3.11-embed IMPORTED_TARGET GLOBAL)
 if(NOT PYTHON_FOUND)
-  pkg_check_modules(PYTHON python3 IMPORTED_TARGET GLOBAL)
+  pkg_check_modules(PYTHON python-3.11 IMPORTED_TARGET GLOBAL)
 endif()
