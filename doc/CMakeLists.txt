@@ -47,6 +47,7 @@ if(ENABLE_MAN OR ENABLE_DOC)
       -a pygments-style=native
       -a docinfodir="${CMAKE_CURRENT_SOURCE_DIR}"
       -a autogendir="${CMAKE_CURRENT_BINARY_DIR}/autogen"
+      -a toc-class="bogus"
     )
 
     # asciidoctor arguments for user's guide
