@@ -4502,6 +4502,15 @@ IRC_COMMAND_CALLBACK(part)
     int i, num_channels;
 
     IRC_BUFFER_GET_SERVER_CHANNEL(buffer);
+
+    if (ptr_server && !ptr_server->is_connected) {
+	if (argc > 1)
+	    if (irc_channel_is_channel (ptr_server, argv[1]))
+		ptr_channel = irc_channel_search (ptr_server, argv[1]);
+	if (ptr_channel && ptr_channel->part == 0)
+	    ptr_channel->part = 1;
+    }
+
     IRC_COMMAND_CHECK_SERVER("part", 1, 1);
 
     /* make C compiler happy */
