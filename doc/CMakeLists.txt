@@ -40,7 +40,7 @@ if(ENABLE_MAN OR ENABLE_DOC)
       -a reproducible
       -a "prewrap!"
       -a "webfonts!"
-      -a icons=font
+      -a "icons!"
       -a revnumber="${VERSION}"
       -a sectanchors
       -a source-highlighter=pygments
