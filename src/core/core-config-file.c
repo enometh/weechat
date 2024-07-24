@@ -3189,7 +3189,8 @@ config_file_write_internal (struct t_config_file *config_file,
 {
     int filename_length, rc;
     long file_perms;
-    char *filename, *filename2, resolved_path[PATH_MAX], *error;
+    char *filename, *filename2 ,resolved_path[PATH_MAX], *error;
+
     struct t_config_section *ptr_section;
     struct t_config_option *ptr_option;
 
@@ -3205,6 +3206,8 @@ config_file_write_internal (struct t_config_file *config_file,
     snprintf (filename, filename_length, "%s%s%s",
               weechat_config_dir, DIR_SEPARATOR, config_file->filename);
 
+  if (CONFIG_BOOLEAN(config_look_save_config_with_useless_rename))
+  {
     /*
      * build temporary filename, this temp file will be renamed to filename
      * after write
@@ -3231,6 +3234,10 @@ config_file_write_internal (struct t_config_file *config_file,
             }
         }
     }
+  } else {
+    rc = 0;
+    filename2 = filename;
+  }
 
     log_printf (_("Writing configuration file %s%s%s"),
                 config_file->filename,
@@ -3334,6 +3341,7 @@ config_file_write_internal (struct t_config_file *config_file,
     fclose (config_file->file);
     config_file->file = NULL;
 
+  if (CONFIG_BOOLEAN(config_look_save_config_with_useless_rename)) {
     /* update file mode */
     error = NULL;
     file_perms = strtol (CONFIG_STRING(config_look_config_permissions), &error, 8);
@@ -3352,9 +3360,12 @@ config_file_write_internal (struct t_config_file *config_file,
 
     /* rename temp file to target file */
     rc = rename (filename2, filename);
-
+  }
     free (filename);
+
+  if (CONFIG_BOOLEAN(config_look_save_config_with_useless_rename)) {
     free (filename2);
+  }
 
     if (rc != 0)
         return WEECHAT_CONFIG_WRITE_ERROR;
@@ -3373,9 +3384,13 @@ error:
         fclose (config_file->file);
         config_file->file = NULL;
     }
+  if (CONFIG_BOOLEAN(config_look_save_config_with_useless_rename)) {
     unlink (filename2);
+  }
     free (filename);
+  if (CONFIG_BOOLEAN(config_look_save_config_with_useless_rename)) {
     free (filename2);
+  }
     return WEECHAT_CONFIG_WRITE_ERROR;
 }
 

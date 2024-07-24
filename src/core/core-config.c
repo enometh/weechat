@@ -210,6 +210,7 @@ struct t_config_option *config_look_read_marker_string = NULL;
 struct t_config_option *config_look_read_marker_update_on_buffer_switch = NULL;
 struct t_config_option *config_look_save_config_on_exit = NULL;
 struct t_config_option *config_look_save_config_with_fsync = NULL;
+struct t_config_option *config_look_save_config_with_useless_rename = NULL;
 struct t_config_option *config_look_save_layout_on_exit = NULL;
 struct t_config_option *config_look_scroll_amount = NULL;
 struct t_config_option *config_look_scroll_bottom_after_switch = NULL;
@@ -4238,6 +4239,13 @@ config_weechat_init_options ()
             NULL, NULL, NULL,
             &config_change_save_config_on_exit, NULL, NULL,
             NULL, NULL, NULL);
+        config_look_save_config_with_useless_rename = config_file_new_option (
+            weechat_config_file, weechat_config_section_look,
+            "save_config_with_useless_rename", "boolean",
+            N_("use a temporary file and rename to save the config and rename "
+               "it"),
+            NULL, 0, 0, "off", NULL, 0,
+            NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         config_look_save_layout_on_exit = config_file_new_option (
             weechat_config_file, weechat_config_section_look,
             "save_layout_on_exit", "enum",
